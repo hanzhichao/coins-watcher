@@ -6,6 +6,7 @@ import { TrendingUp, TrendingDown, Search, Plus, Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
+import { fetch } from '@tauri-apps/plugin-http';
 
 interface CoinData {
   id: string
@@ -123,6 +124,19 @@ export default function Home() {
   const [coins, setCoins] = useState<CoinData[]>(mockCoinData)
   const [searchTerm, setSearchTerm] = useState("")
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  async function getPrice() {
+    const url = 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USDT'
+    const response = await fetch(url, {
+      method: 'GET',
+    });
+    console.log(response.status); // e.g. 200
+    console.log(await response.text()); // e.g. "OK"
+  }
+
+  useEffect(()=>{
+    void getPrice()
+  }, []);
 
   useEffect(() => {
     invoke("init");

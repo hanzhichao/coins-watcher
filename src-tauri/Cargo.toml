@@ -26,6 +26,7 @@ tauri-nspanel = { git = "https://github.com/ahkohd/tauri-nspanel", branch = "v2"
 monitor = { git = "https://github.com/ahkohd/tauri-toolkit", branch = "v2" }
 
 tauri-plugin-shell = "2.2.1"
+tauri-plugin-http = "2"
 
 [features]
 # by default Tauri runs in production mode
