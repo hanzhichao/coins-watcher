@@ -17,6 +17,9 @@ importers:
       '@tauri-apps/plugin-http':
         specifier: ~2
         version: 2.4.4
+      '@tauri-apps/plugin-notification':
+        specifier: ~2
+        version: 2.2.3
       '@tauri-apps/plugin-opener':
         specifier: ^2.2.7
         version: 2.2.7
@@ -975,6 +978,9 @@ packages:
 
   '@tauri-apps/plugin-http@2.4.4':
     resolution: {integrity: sha512-IjlaaS4z8ybB10qnh6djZ2FIaHdWVs/U1D1C56udKcjX1f+jAmR8/s7qBV5cv/OmcGkOIzet3LWuH70LKf4J2A==}
+
+  '@tauri-apps/plugin-notification@2.2.3':
+    resolution: {integrity: sha512-IlMdSVFsrKg0eIHBloFFosnWbbz6JdwBywfZrYZnE1+acgXvNS3T1YB5w9R6UXw+KKQ94ODBu7JF7a1YUiAK6A==}
 
   '@tauri-apps/plugin-opener@2.2.7':
     resolution: {integrity: sha512-uduEyvOdjpPOEeDRrhwlCspG/f9EQalHumWBtLBnp3fRp++fKGLqDOyUhSIn7PzX45b/rKep//ZQSAQoIxobLA==}
@@ -3179,6 +3185,10 @@ snapshots:
       '@tauri-apps/cli-win32-x64-msvc': 2.5.0
 
   '@tauri-apps/plugin-http@2.4.4':
+    dependencies:
+      '@tauri-apps/api': 2.5.0
+
+  '@tauri-apps/plugin-notification@2.2.3':
     dependencies:
       '@tauri-apps/api': 2.5.0
 

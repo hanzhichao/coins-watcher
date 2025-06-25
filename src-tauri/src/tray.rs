@@ -8,7 +8,7 @@ use tauri_nspanel::ManagerExt;
 use crate::fns::position_menubar_panel;
 
 pub fn create(app_handle: &AppHandle) -> tauri::Result<TrayIcon> {
-  let icon = Image::from_bytes(include_bytes!("../icons/tray.png"))?;
+  let icon = Image::from_bytes(include_bytes!("../icons/icon.png"))?;
 
   TrayIconBuilder::with_id("tray")
     .icon(icon)
@@ -18,7 +18,7 @@ pub fn create(app_handle: &AppHandle) -> tauri::Result<TrayIcon> {
 
       if let TrayIconEvent::Click { button_state, .. } = event {
         if button_state == MouseButtonState::Up {
-          let panel = app_handle.get_webview_panel("main").unwrap();
+          let panel = app_handle.get_webview_panel("main").expect("get_webview_panel失败");
 
           if panel.is_visible() {
             panel.order_out(None);

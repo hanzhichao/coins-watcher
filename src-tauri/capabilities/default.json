@@ -10,7 +10,12 @@
     "opener:default",
     {
       "identifier": "http:default",
-      "allow": [{ "url": "https://min-api.cryptocompare.com" }]
-    }
+      "allow": [
+        {
+          "url": "https://min-api.cryptocompare.com"
+        }
+      ]
+    },
+    "notification:default"
   ]
 }
