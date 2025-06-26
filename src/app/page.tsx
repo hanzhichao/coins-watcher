@@ -1,11 +1,13 @@
 "use client"
 
-import { invoke } from "@tauri-apps/api/core";
-import { useState, useEffect } from "react"
-import { Search, Plus, Menu } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import {invoke} from "@tauri-apps/api/core";
+import {useState, useEffect} from "react"
+import {Search, Plus, Menu} from "lucide-react"
+import {Button} from "@/components/ui/button"
+import {Input} from "@/components/ui/input"
 import {CoinItem} from "@/components/coin-item";
+import {Store, load as loadStore } from '@tauri-apps/plugin-store';
+
 import {
   isPermissionGranted,
   requestPermission,
@@ -128,21 +130,36 @@ export default function Home() {
     let permissionGranted = await isPermissionGranted();
 
     // 如果没有，我们需要请求它
-        if (!permissionGranted) {
-          const permission = await requestPermission();
-          permissionGranted = permission === 'granted';
-        }
+    if (!permissionGranted) {
+      const permission = await requestPermission();
+      permissionGranted = permission === 'granted';
+    }
 
     // 一旦获得许可，我们就可以发送通知
-        if (permissionGranted) {
-          sendNotification({ title: 'Tauri', body: 'Tauri is awesome ---------- !' });
-        }
-      }
+    if (permissionGranted) {
+      sendNotification({title: 'Tauri', body: 'Tauri is awesome ---------- !'});
+    }
+  }
 
-  // useEffect(() => {
-  //   void sendMsg();
-  // }, []);
+  const storeKey = async () => {
+    // Store 会在 JavaScript 绑定时自动加载。
+    const store = await Store.load('store.json');;
 
+    // 设置一个值。
+    await store.set('some-key', 5);
+
+    // 获取一个值。
+    const val = await store.get('some-key');
+    console.log(val); // { value: 5 }
+
+    // 您可以在进行更改后手动保存存储
+    // 否则如上所述，它将在正常退出时保存。
+    await store.save();
+  }
+
+  useEffect(() => {
+    void storeKey();
+  }, []);
 
 
   // Simulate real-time price updates
@@ -157,7 +174,9 @@ export default function Home() {
       )
     }, 5000)
 
-    return () => { clearInterval(interval); }
+    return () => {
+      clearInterval(interval);
+    }
   }, [])
 
   const filteredCoins = coins.filter(
@@ -181,7 +200,9 @@ export default function Home() {
               <Input
                 placeholder="搜索币种..."
                 value={searchTerm}
-                onChange={(e) => { setSearchTerm(e.target.value); }}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                }}
                 className=""
               />
             </div>
@@ -189,8 +210,10 @@ export default function Home() {
 
           {/*<h1 className="text-xl font-bold text-teal-500 hidden sm:block">币观 Lite</h1>*/}
 
-          <Button variant="ghost" size="icon" className="text-teal-500" onClick={() => {void sendMsg()}}>
-            <Plus className="h-6 w-6" />
+          <Button variant="ghost" size="icon" className="text-teal-500" onClick={() => {
+            void sendMsg()
+          }}>
+            <Plus className="h-6 w-6"/>
           </Button>
         </div>
       </div>
@@ -198,7 +221,9 @@ export default function Home() {
       {/* Price List */}
       <div className="max-w-4xl mx-auto p-4 space-y-2">
         {filteredCoins.map((coin) => (
-          <CoinItem key={coin.id} id={coin.id} symbol={coin.symbol} name={coin.name} change24h={coin.change24h} volume={coin.volume} marketCap={coin.marketCap} exchange={coin.exchange} pair={coin.pair} icon={coin.icon} />
+          <CoinItem key={coin.id} id={coin.id} symbol={coin.symbol} name={coin.name} change24h={coin.change24h}
+                    volume={coin.volume} marketCap={coin.marketCap} exchange={coin.exchange} pair={coin.pair}
+                    icon={coin.icon}/>
         ))}
       </div>
     </div>
