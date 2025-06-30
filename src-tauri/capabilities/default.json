@@ -13,6 +13,9 @@
       "allow": [
         {
           "url": "https://min-api.cryptocompare.com"
+        },
+        {
+          "url": "https://www.binance.com"
         }
       ]
     },

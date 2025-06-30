@@ -530,6 +530,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "coins-watcher"
+version = "0.0.1"
+dependencies = [
+ "monitor",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tauri-nspanel",
+ "tauri-plugin-http",
+ "tauri-plugin-notification",
+ "tauri-plugin-opener",
+ "tauri-plugin-shell",
+ "tauri-plugin-store",
+]
+
+[[package]]
 name = "combine"
 version = "4.6.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4103,23 +4120,6 @@ dependencies = [
  "syn 2.0.98",
  "tauri-codegen",
  "tauri-utils",
-]
-
-[[package]]
-name = "tauri-nextjs-template"
-version = "0.1.0"
-dependencies = [
- "monitor",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tauri-nspanel",
- "tauri-plugin-http",
- "tauri-plugin-notification",
- "tauri-plugin-opener",
- "tauri-plugin-shell",
- "tauri-plugin-store",
 ]
 
 [[package]]

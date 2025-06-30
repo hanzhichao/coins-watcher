@@ -12,6 +12,7 @@ pub fn create(app_handle: &AppHandle) -> tauri::Result<TrayIcon> {
 
   TrayIconBuilder::with_id("tray")
     .icon(icon)
+    .title("CoinsWatcher")
     .icon_as_template(true)
     .on_tray_icon_event(|tray, event| {
       let app_handle = tray.app_handle();
